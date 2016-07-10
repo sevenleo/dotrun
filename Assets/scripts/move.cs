@@ -6,9 +6,8 @@ using UnityEngine.SceneManagement;
 public class move : MonoBehaviour
 {
 
-    public Text P1status;
+    public Text centertxt;
     public GameObject player;
-    float cameradistance;
     Vector3 mouseposition;
     
     int z = 10;
@@ -16,8 +15,7 @@ public class move : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        status.special = 3f;
-        cameradistance = -1f * transform.position.z;
+
     }
 
     // Update is called once per frame
@@ -35,6 +33,10 @@ public class move : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "defense") SceneManager.LoadScene("startup");
+        if (other.tag != "defense" && other.tag != "base" && other.tag != "PlayerSprite")
+        {
+            Debug.LogError(other.name+" me matou");
+            SceneManager.LoadScene("startup");
+        }
     }
 }

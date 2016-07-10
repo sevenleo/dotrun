@@ -17,14 +17,27 @@ public class Display : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+
+        /*
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
         GetComponent<Text>().text =
-            "Mouse = " + mouseposition +
+            "Tela = "+ Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10))+
+            "\nMouse = " + mouseposition +
             "\nbase = " + _base.transform.position+
             "\nPlayerClass = " + player.transform.position +
             "\nCirclePlayer = " + CirclePlayer.transform.position +
             "\nDistance = " + Vector2.Distance(mouseposition, player.transform.position);
-    }
+            */
+
+        int specialnormalized = (status.special / 5 > 0) ? (int)(status.special / 5) : 0;
+        GetComponent<Text>().text = 
+            "Special = " + specialnormalized +
+            "\nMaxEnemys = "+ status.maxenemys+
+            "\nEnemysSpeed = " + status.enemyspeed +
+            "\nsecuredistance = " + status.securedistance+
+            "\nscore = " + status.score;
+
+}
 }

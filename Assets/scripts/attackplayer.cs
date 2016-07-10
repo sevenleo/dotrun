@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class attackplayer : MonoBehaviour {
 
     GameObject player;
-    float speed = 3f;
     Vector3 direction;
     Vector3 moveTo;
     float distance;
     int life = 1;
+    int value = 1;
 
     
     // Use this for initialization
@@ -32,7 +32,7 @@ public class attackplayer : MonoBehaviour {
 
         distance = moveTo.magnitude;
         direction = moveTo / distance;
-        transform.position += Time.deltaTime * speed * direction;
+        transform.position += Time.deltaTime * status.enemyspeed * direction;
 
     }
 
@@ -41,14 +41,17 @@ public class attackplayer : MonoBehaviour {
         if (other.tag != "enemy")
         {
             life--;
+            status.score += value;
         }
         else {
-            if (gameObject.GetHashCode() > other.GetHashCode())
+            if (gameObject.GetHashCode() < other.GetHashCode()) {
                 Destroy(gameObject);
+            }
             else {
                 Destroy(other);
-                life++;
-                transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.5f, 1.5f, 0));
+                value*=3;
+                transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.2f, 1.2f, 0));
+                //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r * Random.Range(0, 1), GetComponent<SpriteRenderer>().color.g*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.b*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.a*Random.Range(0.5f, 1));
             }
                 
         }
