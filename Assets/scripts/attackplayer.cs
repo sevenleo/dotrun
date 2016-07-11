@@ -19,7 +19,8 @@ public class attackplayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        //Destroy(gameObject, 5f);
+        if (status.gravity) Destroy(gameObject, 5f);
+
         if (life <= 0) Destroy(gameObject);
 
         if (gameObject.tag == "texto") {
@@ -38,23 +39,28 @@ public class attackplayer : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "enemy")
+        switch (other.tag)
         {
-            life--;
-            status.score += value;
+            case "base":
+                break;
+            case "defense":
+                life--;
+                status.score += value;
+                break;
+            case "enemy":
+                if (gameObject.GetHashCode() < other.GetHashCode())  {
+                    Destroy(gameObject);
+                }
+                else   {
+                    Destroy(other);
+                    value *= 3;
+                    transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.2f, 1.2f, 0));
+                    //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r * Random.Range(0, 1), GetComponent<SpriteRenderer>().color.g*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.b*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.a*Random.Range(0.5f, 1));
+                }
+                break;
+            default:
+                Debug.Log("Colido com um" + other.tag+" chamado "+other.name);
+                break;
         }
-        else {
-            if (gameObject.GetHashCode() < other.GetHashCode()) {
-                Destroy(gameObject);
-            }
-            else {
-                Destroy(other);
-                value*=3;
-                transform.localScale = Vector3.Scale(transform.localScale, new Vector3(1.2f, 1.2f, 0));
-                //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r * Random.Range(0, 1), GetComponent<SpriteRenderer>().color.g*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.b*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.a*Random.Range(0.5f, 1));
-            }
-                
-        }
-
     }
 }

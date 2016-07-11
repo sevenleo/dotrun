@@ -9,8 +9,6 @@ public class move : MonoBehaviour
     public Text centertxt;
     public GameObject player;
     Vector3 mouseposition;
-    
-    int z = 10;
 
     // Use this for initialization
     void Start()
@@ -21,7 +19,7 @@ public class move : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y,z);
+        mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y,status.z);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
         if (Input.GetMouseButton(0)  && Vector2.Distance(mouseposition, transform.position) > 0)

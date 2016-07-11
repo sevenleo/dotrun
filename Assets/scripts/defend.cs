@@ -9,8 +9,9 @@ public class defend : MonoBehaviour {
     public float firerate = 0.2f;
     float nextfire;
     float clicktime;
-    public float clickrate = 1f;
+    float clickrate = 0.18f;
     bool doubleclick = false;
+    float range;
 
     void Start () {
         clicktime = Time.time;
@@ -25,8 +26,7 @@ public class defend : MonoBehaviour {
             clicktime = Time.time;
         }
 
-
-
+       
         if ((Input.GetMouseButton(1) || Input.touches.Length>=2 || doubleclick) && Time.time>nextfire && status.special > 0)
         {
             doubleclick = false;
@@ -34,11 +34,15 @@ public class defend : MonoBehaviour {
             nextfire = Time.time + firerate;
             sphere = Instantiate<GameObject>(sphere_prefab);
             sphere.transform.position = transform.position;
-            //sphere.GetComponent<Renderer>().material.color = new Color(1f,1f,1f,1f);
             sphere.GetComponent<Renderer>().material = GetComponent<Renderer>().material;
             launched = true;
             status.wait = true;
-            status.special -= 5f;
+            status.special -= status.defensevalue;
+            range = status.maxscreenside * (status.special / status.speciallimit);
+            Debug.Log("max " + status.maxscreenside);
+            Debug.Log("sp " + status.special);
+            Debug.Log("spl " + status.speciallimit);
+            Debug.Log("range " + range);
         }
 
         if (sphere == null)
@@ -48,8 +52,9 @@ public class defend : MonoBehaviour {
 
         }
         else if (launched )
-        {
-            sphere.transform.localScale = Vector3.Scale(sphere.transform.localScale, new Vector3(1.1f, 1.1f, 0));
+        {   
+            
+            if (sphere.transform.localScale.x<range) sphere.transform.localScale = Vector3.Scale(sphere.transform.localScale, new Vector3(1.1f, 1.1f, 0));
             sphere.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, 0.95f * sphere.GetComponent<Renderer>().material.color.a);
             Destroy(sphere, 1);
         }

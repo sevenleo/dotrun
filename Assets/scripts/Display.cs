@@ -31,13 +31,15 @@ public class Display : MonoBehaviour {
             "\nDistance = " + Vector2.Distance(mouseposition, player.transform.position);
             */
 
-        int specialnormalized = (status.special / 5 > 0) ? (int)(status.special / 5) : 0;
+        int specialnormalized = (status.special / status.defensevalue > 0) ? (int)(status.special / status.defensevalue) : 0;
         GetComponent<Text>().text = 
             "Special = " + specialnormalized +
-            "\nMaxEnemys = "+ status.maxenemys+
+            "\nSpecialimit = " + status.speciallimit +
+            "\nMaxEnemys = " + status.maxenemys+
             "\nEnemysSpeed = " + status.enemyspeed +
             "\nsecuredistance = " + status.securedistance+
-            "\nscore = " + status.score;
+            "\nscore = " + status.score+
+            "\ngravity = " + status.gravity;
 
-}
+    }
 }

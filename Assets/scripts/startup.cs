@@ -1,22 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class startup : MonoBehaviour
 {
 
-    // Use this for initialization
+    float clicktime;
+    float clickrate = 0.18f;
+    bool doubleclick = false;
+
     void Start()
     {
-
+        clicktime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Time.time < clicktime + clickrate) doubleclick = true;
+            clicktime = Time.time;
+        }
 
-        if ((Input.GetMouseButton(1) || Input.touches.Length >= 2))
+        if (Input.GetMouseButton(1) || Input.touches.Length >= 2 || doubleclick)
+        {
+            doubleclick = false;
+            Save();
             SceneManager.LoadScene("scene");
+        }
 
     }
+
+    void Save()
+    {
+        PlayerPrefs.SetFloat("maxenemys", GameObject.Find("maxenemys").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("enemyspeed", GameObject.Find("enemyspeed").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("special", GameObject.Find("special").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("speciallimit", GameObject.Find("speciallimit").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("securedistance", GameObject.Find("securedistance").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
+        PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn?1:0);
+    }
+
 }
