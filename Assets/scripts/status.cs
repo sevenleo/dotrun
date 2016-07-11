@@ -17,6 +17,8 @@ public class status : MonoBehaviour {
     static public int z = 10;
     static public float defensevalue = 1f;
     static public bool gravity;
+    static public bool GodMode;
+    static public float traillife=0.2f;
     int x, y;
     int goal;
     Vector3 screen;
@@ -43,7 +45,6 @@ public class status : MonoBehaviour {
     {
         if ( score> PlayerPrefs.GetInt("bestscore") || PlayerPrefs.GetInt("bestscore")==0 )
             PlayerPrefs.SetInt("bestscore", score);
-        
 
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("startup");
@@ -54,6 +55,7 @@ public class status : MonoBehaviour {
         special += Time.deltaTime;
         
         GameObject.Find("centertxt").GetComponent<Text>().text = "" + (int)status.score;
+
         if (score > goal)
         {
             maxenemys = maxenemys * 1.5f;
@@ -68,15 +70,28 @@ public class status : MonoBehaviour {
 
     void Load()
     {
-
+        traillife = PlayerPrefs.GetFloat("traillife");
         maxenemys = PlayerPrefs.GetFloat("maxenemys");
         enemyspeed = PlayerPrefs.GetFloat("enemyspeed");
         special = PlayerPrefs.GetFloat("special");
         speciallimit = PlayerPrefs.GetFloat("speciallimit");
         securedistance = PlayerPrefs.GetFloat("securedistance");
         defensevalue = PlayerPrefs.GetFloat("defensevalue");
-        if (PlayerPrefs.GetFloat("gravity") == 1) gravity = true;
-        else gravity = false;
-        if (status.gravity) GameObject.Find("base").SetActive(true);
+
+        if (PlayerPrefs.GetInt("gravity") == 1)
+        {
+            gravity = true;
+        }
+        else {
+            gravity = false;
+            GameObject.Find("base").SetActive(false);
+        }
+
+        if (PlayerPrefs.GetInt("GodMode") == 1)
+        {
+            GodMode = true;
+        }
+        else GodMode = false;
+
     }
 }

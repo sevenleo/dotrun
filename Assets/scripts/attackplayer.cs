@@ -19,8 +19,12 @@ public class attackplayer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (status.gravity) Destroy(gameObject, 5f);
 
+        if (status.gravity)
+        {
+                Destroy(gameObject, 10f);
+                GetComponent<Rigidbody2D>().gravityScale = 1;
+        }
         if (life <= 0) Destroy(gameObject);
 
         if (gameObject.tag == "texto") {
@@ -47,6 +51,10 @@ public class attackplayer : MonoBehaviour {
                 life--;
                 status.score += value;
                 break;
+            case "trail":
+                life--;
+                status.score += value;
+                break;
             case "enemy":
                 if (gameObject.GetHashCode() < other.GetHashCode())  {
                     Destroy(gameObject);
@@ -59,7 +67,7 @@ public class attackplayer : MonoBehaviour {
                 }
                 break;
             default:
-                //Debug.Log("Colido com um" + other.tag+" chamado "+other.name);
+                Debug.Log("Colido com um " + other.tag+" chamado "+other.name);
                 break;
         }
     }

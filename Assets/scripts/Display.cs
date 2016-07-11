@@ -32,14 +32,15 @@ public class Display : MonoBehaviour {
             */
 
         int specialnormalized = (status.special / status.defensevalue > 0) ? (int)(status.special / status.defensevalue) : 0;
-        GetComponent<Text>().text = 
+        GetComponent<Text>().text =
             "Special = " + specialnormalized +
             "\nSpecialimit = " + status.speciallimit +
-            "\nMaxEnemys = " + status.maxenemys+
+            "\nMaxEnemys = " + status.maxenemys +
             "\nEnemysSpeed = " + status.enemyspeed +
-            "\nsecuredistance = " + status.securedistance+
-            "\nscore = " + status.score+
-            "\ngravity = " + status.gravity;
+            "\nsecuredistance = " + status.securedistance +
+            "\nscore = " + status.score +
+            "\ngravity = " + status.gravity +
+            "\nGodMode = " + status.GodMode;
 
     }
 }

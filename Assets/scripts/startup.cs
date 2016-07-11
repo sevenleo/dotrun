@@ -20,8 +20,6 @@ public class startup : MonoBehaviour
     void Update()
     {
 
-        
-
         if (Input.GetMouseButtonDown(0))
         {
             if (Time.time < clicktime + clickrate) doubleclick = true;
@@ -42,13 +40,16 @@ public class startup : MonoBehaviour
 
     void Save()
     {
+        
+        PlayerPrefs.SetFloat("traillife", GameObject.Find("traillife").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("maxenemys", GameObject.Find("maxenemys").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("enemyspeed", GameObject.Find("enemyspeed").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("special", GameObject.Find("special").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("speciallimit", GameObject.Find("speciallimit").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("securedistance", GameObject.Find("securedistance").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
-        PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn?1:0);
+        PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
+        PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
     }
 
 }
