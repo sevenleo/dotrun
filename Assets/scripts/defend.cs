@@ -39,10 +39,10 @@ public class defend : MonoBehaviour {
             status.wait = true;
             status.special -= status.defensevalue;
             range = status.maxscreenside * (status.special / status.speciallimit);
-            Debug.Log("max " + status.maxscreenside);
+            /*Debug.Log("max " + status.maxscreenside);
             Debug.Log("sp " + status.special);
             Debug.Log("spl " + status.speciallimit);
-            Debug.Log("range " + range);
+            Debug.Log("range " + range);*/
         }
 
         if (sphere == null)

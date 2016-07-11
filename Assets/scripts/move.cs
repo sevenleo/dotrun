@@ -33,7 +33,7 @@ public class move : MonoBehaviour
     {
         if (other.tag != "defense" && other.tag != "base" && other.tag != "PlayerSprite")
         {
-            Debug.LogError(other.name+" me matou");
+            //Debug.LogError(other.name+" me matou");
             SceneManager.LoadScene("startup");
         }
     }

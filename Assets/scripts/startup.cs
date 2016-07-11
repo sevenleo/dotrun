@@ -12,17 +12,24 @@ public class startup : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("bestscore").GetComponent<Text>().text = GameObject.Find("bestscore").GetComponent<Text>().text + PlayerPrefs.GetInt("bestscore");
         clicktime = Time.time;
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        
+
         if (Input.GetMouseButtonDown(0))
         {
             if (Time.time < clicktime + clickrate) doubleclick = true;
             clicktime = Time.time;
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
 
         if (Input.GetMouseButton(1) || Input.touches.Length >= 2 || doubleclick)
         {

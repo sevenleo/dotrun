@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class status : MonoBehaviour {
     public GameObject specialbar;
@@ -31,8 +32,8 @@ public class status : MonoBehaviour {
         maxenemys = 5;
         securedistance = 2f;
         wait = false;
-        special = 5;
-        score = 0;*/
+        special = 5;*/
+        score = 0;
         goal = 5;
         Load();
     }
@@ -40,6 +41,12 @@ public class status : MonoBehaviour {
 
     void Update()
     {
+        if ( score> PlayerPrefs.GetInt("bestscore") || PlayerPrefs.GetInt("bestscore")==0 )
+            PlayerPrefs.SetInt("bestscore", score);
+        
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            SceneManager.LoadScene("startup");
 
         if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
         else specialbar.transform.localScale = Vector3.zero;

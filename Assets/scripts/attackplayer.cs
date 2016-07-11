@@ -59,7 +59,7 @@ public class attackplayer : MonoBehaviour {
                 }
                 break;
             default:
-                Debug.Log("Colido com um" + other.tag+" chamado "+other.name);
+                //Debug.Log("Colido com um" + other.tag+" chamado "+other.name);
                 break;
         }
     }
