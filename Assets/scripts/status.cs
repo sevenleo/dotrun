@@ -85,7 +85,7 @@ public class status : MonoBehaviour {
 
         if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
-            
+            gravity = false;
         }
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
@@ -93,24 +93,13 @@ public class status : MonoBehaviour {
         }
         else if (PlayerPrefs.GetString("GameMode") == "snooker")
         {
+            gravity = false;
+        }
 
-        }
-        /*
-            if (PlayerPrefs.GetInt("gravity") == 1)
-            {
-                gravity = true;
-            }
-            else
-            {
-                gravity = false;
-                GameObject.Find("base").SetActive(false);
-            }
-            */
         if (PlayerPrefs.GetInt("GodMode") == 1)
-        {
             GodMode = true;
-        }
-        else GodMode = false;
+        else
+            GodMode = false;
 
     }
 }
