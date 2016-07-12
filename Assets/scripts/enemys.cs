@@ -17,7 +17,7 @@ public class enemys : MonoBehaviour {
     void Update()
     {
         HowMany = GameObject.FindGameObjectsWithTag("enemy").Length;
-        if (Time.time > ControlTime && HowMany < status.maxenemys && !status.wait)
+        if (Time.time > ControlTime && HowMany < status.maxenemys && !status.wait && status.GameMode!="snooker")
         {
             ControlTime = Time.time + ControlTimeRate;
             Vector3 center = GameObject.FindGameObjectWithTag("Player").transform.position;
