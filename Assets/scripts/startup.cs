@@ -33,7 +33,6 @@ public class startup : MonoBehaviour
         {
             doubleclick = false;
             Save();
-            Debug.Log(PlayerPrefs.GetString("GameMode").ToLower());
             SceneManager.LoadScene(PlayerPrefs.GetString("GameMode").ToLower());
         }
 
@@ -52,7 +51,7 @@ public class startup : MonoBehaviour
         PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
         PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
         PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
-        PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().itemText.text);
+        PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
     }
 
 }

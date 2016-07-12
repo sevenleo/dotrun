@@ -83,15 +83,29 @@ public class status : MonoBehaviour {
         defensevalue = PlayerPrefs.GetFloat("defensevalue");
         GameMode = PlayerPrefs.GetString("GameMode");
 
-        if (PlayerPrefs.GetInt("gravity") == 1)
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+            
+        }
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
             gravity = true;
         }
-        else {
-            gravity = false;
-            GameObject.Find("base").SetActive(false);
-        }
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
 
+        }
+        /*
+            if (PlayerPrefs.GetInt("gravity") == 1)
+            {
+                gravity = true;
+            }
+            else
+            {
+                gravity = false;
+                GameObject.Find("base").SetActive(false);
+            }
+            */
         if (PlayerPrefs.GetInt("GodMode") == 1)
         {
             GodMode = true;
