@@ -76,6 +76,13 @@ public class TrailRendererWith2DCollider : MonoBehaviour
         //lifeTime = status.traillife;
         lifeTime = PlayerPrefs.GetFloat("traillife");
 
+
+        //size
+
+        widthEnd = widthEnd* PlayerPrefs.GetFloat("ballsize");
+        widthStart = widthEnd;
+
+
         //create an object and mesh for the trail
         GameObject trail = new GameObject("Trail", new[] { typeof(MeshRenderer), typeof(MeshFilter), typeof(PolygonCollider2D) });
         mesh = trail.GetComponent<MeshFilter>().mesh = new Mesh();

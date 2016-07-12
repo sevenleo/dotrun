@@ -4,6 +4,10 @@ using UnityEngine.SceneManagement;
 
 public class life : MonoBehaviour {
 
+    void Start()
+    {
+        transform.localScale = transform.localScale * status.ballsize;
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if ( !status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "base" && other.tag != "PlayerSprite")

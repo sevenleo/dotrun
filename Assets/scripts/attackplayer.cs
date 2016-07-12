@@ -15,6 +15,7 @@ public class attackplayer : MonoBehaviour {
     // Use this for initialization
     void Start () {
         player = GameObject.FindGameObjectWithTag("Player");
+        transform.localScale = transform.localScale * status.ballsize;
     }
 	
 	// Update is called once per frame

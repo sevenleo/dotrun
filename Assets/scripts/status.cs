@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class status : MonoBehaviour {
     public GameObject specialbar;
     static public float speciallimit { get; set; }
+    static public float ballsize { get; set; }
     static public float special { get; set; }
     static public float securedistance { get; set; }
     static public float maxenemys { get; set; }
@@ -19,6 +20,8 @@ public class status : MonoBehaviour {
     static public bool gravity;
     static public bool GodMode;
     static public float traillife=0.2f;
+    static public float playerspeed = 5f;
+    static public string GameMode;
     int x, y;
     int goal;
     Vector3 screen;
@@ -75,8 +78,10 @@ public class status : MonoBehaviour {
         enemyspeed = PlayerPrefs.GetFloat("enemyspeed");
         special = PlayerPrefs.GetFloat("special");
         speciallimit = PlayerPrefs.GetFloat("speciallimit");
+        ballsize = PlayerPrefs.GetFloat("ballsize");
         securedistance = PlayerPrefs.GetFloat("securedistance");
         defensevalue = PlayerPrefs.GetFloat("defensevalue");
+        GameMode = PlayerPrefs.GetString("GameMode");
 
         if (PlayerPrefs.GetInt("gravity") == 1)
         {

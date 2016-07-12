@@ -33,7 +33,8 @@ public class startup : MonoBehaviour
         {
             doubleclick = false;
             Save();
-            SceneManager.LoadScene("scene");
+            Debug.Log(PlayerPrefs.GetString("GameMode").ToLower());
+            SceneManager.LoadScene(PlayerPrefs.GetString("GameMode").ToLower());
         }
 
     }
@@ -46,10 +47,12 @@ public class startup : MonoBehaviour
         PlayerPrefs.SetFloat("enemyspeed", GameObject.Find("enemyspeed").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("special", GameObject.Find("special").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("speciallimit", GameObject.Find("speciallimit").GetComponent<Slider>().value);
+        PlayerPrefs.SetFloat("ballsize", GameObject.Find("ballsize").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("securedistance", GameObject.Find("securedistance").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
         PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
         PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
+        PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().itemText.text);
     }
 
 }
