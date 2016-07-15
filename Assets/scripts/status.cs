@@ -20,7 +20,7 @@ public class status : MonoBehaviour {
     static public bool gravity;
     static public bool GodMode;
     static public float traillife=0.2f;
-    static public float playerspeed = 0.2f;
+    static public float playerspeed = 0.5f;
     static public string GameMode;
     int x, y;
     int goal;
