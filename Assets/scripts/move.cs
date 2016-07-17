@@ -22,67 +22,81 @@ public class move : MonoBehaviour
     {
         
         screen = new Vector3(Screen.width, Screen.height, status.z);
-        Debug.Log("Screen Pixels= " + screen);
-        Debug.Log("Screen Pixels Mag= " + screen.magnitude);
+        //Debug.Log("Screen Pixels= " + screen);
+        //Debug.Log("Screen Pixels Mag= " + screen.magnitude);
         screen = Camera.main.ScreenToWorldPoint(screen);
-        Debug.Log("Screen World = " + screen);
-        Debug.Log("Screen World Mag= " + screen.magnitude);
+        //Debug.Log("Screen World = " + screen);
+        //Debug.Log("Screen World Mag= " + screen.magnitude);
 
-        if (status.gravity) GetComponent<Rigidbody2D>().gravityScale = 1;
     }
 
 
 
     void Update()
     {
-        //apagar depois do teste
-        SwipeMouse();
 
-        if (status.gravity) GetComponent<Rigidbody2D>().gravityScale = 1;
+
 
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, status.z);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
-        if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
-        {
 
-            if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        //DOTRUN
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+            if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
             {
                 transform.position = mouseposition;
             }
-            else if (PlayerPrefs.GetString("GameMode") == "gravity")
+
+            if (Input.GetMouseButton(1))
+            {
+                transform.position = mouseposition;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            }
+        }
+
+
+
+        //GRAVITY
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+            if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
             {
                 GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.position, mouseposition, status.playerspeed / 10), ForceMode2D.Force);
-
             }
-            else if (PlayerPrefs.GetString("GameMode") == "snooker")
+
+            if (GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 SwipeMouse();
+                //Swipe();
+            }
+
+        }
+
+
+
+        //SNOOKER
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+            SwipeMouse();
+            //Swipe();
+
+            if (Input.GetMouseButton(1) && status.score==0)
+            {
+                transform.position = mouseposition;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
             }
         }
-
-
-         if ( Input.GetMouseButton(1) )
-         {
-             transform.position = mouseposition;
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-
-        }
-
-
-    }
+ }
 
 
 
-
-
-
-
-
-
-
-
-
+    /// <summary>
+    // FUNCOES DE SWIPE COM O MOUSE OU COM O TOUCH
+    /// </summary>
 
     public void SwipeMouse()
     {
@@ -106,19 +120,14 @@ public class move : MonoBehaviour
             scale = secondPressPos - firstPressPos;
             
             float speed = scale.magnitude / screen.magnitude;
-            Debug.Log("speed =" + speed);
             GetComponent<Rigidbody2D>().AddForce(direction * speed * status.playerspeed, ForceMode2D.Impulse);
-
-           
         }
     }
 
 
 
-
     void Swipe()
     {
-        TouchSimulator();
         if (Input.touches.Length > 0)
         {
             Touch t = Input.GetTouch(0);
@@ -138,26 +147,10 @@ public class move : MonoBehaviour
                 //normalize the 2d vector
                 currentSwipe.Normalize();
 
-                //swipe upwards
-                if (currentSwipe.y > 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
-                {
-                    Debug.Log("up swipe");
-                }
-                //swipe down
-                if (currentSwipe.y < 0 && currentSwipe.x > -0.5f && currentSwipe.x < 0.5f)
-                {
-                    Debug.Log("down swipe");
-                }
-                //swipe left
-                if (currentSwipe.x < 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-                {
-                    Debug.Log("left swipe");
-                }
-                //swipe right
-                if (currentSwipe.x > 0 && currentSwipe.y > -0.5f && currentSwipe.y < 0.5f)
-                {
-                    Debug.Log("right swipe");
-                }
+                scale = secondPressPos - firstPressPos;
+
+                float speed = scale.magnitude / screen.magnitude;
+                GetComponent<Rigidbody2D>().AddForce(direction * speed * status.playerspeed, ForceMode2D.Impulse);
             }
         }
     }
@@ -190,6 +183,8 @@ public class move : MonoBehaviour
         }
     }
 
+
+
     private void HandleTouch(int touchFingerId, Vector3 touchPosition, TouchPhase touchPhase)
     {
         switch (touchPhase)
@@ -205,8 +200,6 @@ public class move : MonoBehaviour
                 break;
         }
     }
-
-
 
 
 

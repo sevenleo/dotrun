@@ -72,6 +72,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour
 
     private void Awake()
     {
+
         //Trail life time
         //lifeTime = status.traillife;
         lifeTime = PlayerPrefs.GetFloat("traillife");
@@ -109,7 +110,7 @@ public class TrailRendererWith2DCollider : MonoBehaviour
 
     private void Update()
     {
-
+        
         if (!pausing)
         {
             //set the mesh and adjust widths if vertices were added or removed

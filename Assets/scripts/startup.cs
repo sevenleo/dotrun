@@ -19,6 +19,7 @@ public class startup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
 
         if (Input.GetMouseButtonDown(0))
         {
