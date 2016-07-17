@@ -24,8 +24,8 @@ public class randomposition : MonoBehaviour {
         screen = new Vector3(Screen.width, Screen.height, status.z);
         screen = Camera.main.ScreenToWorldPoint(screen);
 
-        randx = Random.Range(screen.x * 0.2f, screen.x*0.8f);
-        randy = Random.Range(screen.y * 0.2f, screen.y*0.8f);
+        randx = Random.Range(-screen.x , screen.x);
+        randy = Random.Range(-screen.y * 0.65f, screen.y*0.65f);
 
         go.transform.position = new Vector3(randx, randy, 0);
         go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

@@ -22,11 +22,7 @@ public class move : MonoBehaviour
     {
         
         screen = new Vector3(Screen.width, Screen.height, status.z);
-        //Debug.Log("Screen Pixels= " + screen);
-        //Debug.Log("Screen Pixels Mag= " + screen.magnitude);
         screen = Camera.main.ScreenToWorldPoint(screen);
-        //Debug.Log("Screen World = " + screen);
-        //Debug.Log("Screen World Mag= " + screen.magnitude);
 
     }
 
@@ -40,8 +36,21 @@ public class move : MonoBehaviour
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, status.z);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 
+        ///////// STARTUP  /////////
+        if (PlayerPrefs.GetString("GameMode") == "startup")
+        {
+            if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
+            {
+                transform.position = mouseposition;
+            }
 
-        //DOTRUN
+            if (Input.GetMouseButton(1))
+            {
+                transform.position = mouseposition;
+            }
+        }
+
+        ///////// DOTRUN  /////////
         if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
             if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
@@ -58,8 +67,14 @@ public class move : MonoBehaviour
         }
 
 
+        ///////// TREASURE  /////////
+        if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
 
-        //GRAVITY
+        }
+
+
+        ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
             if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
@@ -67,21 +82,22 @@ public class move : MonoBehaviour
                 GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.position, mouseposition, status.playerspeed / 10), ForceMode2D.Force);
             }
 
+            SwipeMouse();
+            //Swipe();
+        }
+
+
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+
             if (GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 SwipeMouse();
                 //Swipe();
             }
-
-        }
-
-
-
-        //SNOOKER
-        else if (PlayerPrefs.GetString("GameMode") == "snooker")
-        {
-            SwipeMouse();
-            //Swipe();
 
             if (Input.GetMouseButton(1) && status.score==0)
             {

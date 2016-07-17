@@ -17,7 +17,11 @@ public class snooker : MonoBehaviour {
     {
         if (collisionInfo.gameObject.tag == "cacapa")
         {
-            if (gameObject.name == "Player") status.score = 0;
+            if (gameObject.name == "Player") {
+                status.score = 0;
+            } 
+
+
             else if (gameObject.name == "Player2")
             {
                 status.score += 1;

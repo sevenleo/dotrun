@@ -8,32 +8,26 @@ public class Display : MonoBehaviour {
     public GameObject CirclePlayer;
     public GameObject _base;
     Vector3 mouseposition;
+    Vector2 screen;
 
     // Use this for initialization
     void Start () {
-	
-	}
+        screen = new Vector3(Screen.width, Screen.height);
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
+        int specialnormalized = (status.special / status.defensevalue > 0) ? (int)(status.special / status.defensevalue) : 0;
 
-        
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10f);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
-        /*
-        GetComponent<Text>().text =
-            "Tela = "+ Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10))+
-            "\nMouse = " + mouseposition +
-            "\nbase = " + _base.transform.position+
-            "\nPlayerClass = " + player.transform.position +
-            "\nCirclePlayer = " + CirclePlayer.transform.position +
-            "\nDistance = " + Vector2.Distance(mouseposition, player.transform.position);
-            */
 
-        int specialnormalized = (status.special / status.defensevalue > 0) ? (int)(status.special / status.defensevalue) : 0;
+        
         GetComponent<Text>().text =
-            "\nTela = " + Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10)) +
+            "\nTela = " + screen+
+             "\nWorld = " + Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10)) +
             "\nMouse = " + mouseposition +
             "\nDistance mouse2player= " + Vector2.Distance(mouseposition, player.transform.position)+
             "\nSpecial = " + specialnormalized +

@@ -44,11 +44,7 @@ public class defend : MonoBehaviour
         }
         else if (launched)
         {
-            float r, g, b, a;
-            r = GetComponent<SpriteRenderer>().material.color.r;
-            g = GetComponent<SpriteRenderer>().material.color.g;
-            b = GetComponent<SpriteRenderer>().material.color.b;
-            a = sphere.GetComponent<SpriteRenderer>().material.color.a;
+            float a = sphere.GetComponent<SpriteRenderer>().material.color.a;
             if (status.GameMode == "snooker") animatespeed = 0.85f;
             else animatespeed = 0.95f;
             if (sphere.transform.localScale.x < range) sphere.transform.localScale = Vector3.Scale(sphere.transform.localScale, new Vector3(1.1f, 1.1f, 0));

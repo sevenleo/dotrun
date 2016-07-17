@@ -9,17 +9,55 @@ public class startup : MonoBehaviour
     float clicktime;
     float clickrate = 0.18f;
     bool doubleclick = false;
+    Color c,cdefault ;
+    string t;
 
     void Start()
     {
-        GameObject.Find("bestscore").GetComponent<Text>().text = GameObject.Find("bestscore").GetComponent<Text>().text + PlayerPrefs.GetInt("bestscore");
+        //GameObject.Find("bestscore").GetComponent<Text>().text = GameObject.Find("bestscore").GetComponent<Text>().text + PlayerPrefs.GetInt("bestscore");
+        PlayerPrefs.SetString("GameMode", "startup");
         clicktime = Time.time;
+        cdefault = GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
     void Update()
     {
+
         PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
+
+        switch (GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower())
+        {
+            case "dotrun":
+                t = "DOT RUN";
+                c = cdefault;
+                Camera.main.backgroundColor = new Color(0.0f, 0.0f, 0.1f, 1f);
+                break;
+            case "treasure":
+                t = "* Treasure * ";
+                break;
+            case "gravity":
+                t = "Gravity";
+                c = Color.black;
+                Camera.main.backgroundColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+                break;
+            case "snooker":
+                c = new Color(1f, 1f, 1f, 1f);
+                t = "Sn00ker";
+                Camera.main.backgroundColor = new Color(0f, 0.25f, 0.0f, 1f);
+                break;
+            default:
+                break;
+        }
+
+        GameObject.Find("centertxt").GetComponent<Text>().text = t;
+        GameObject.Find("centertxt").GetComponent<Text>().color = c;
+        GameObject.Find("Text").GetComponent<Text>().color = c;
+        GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color = c;
+
+
+
+
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -30,11 +68,11 @@ public class startup : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
 
-        if (Input.GetMouseButton(1) || Input.touches.Length >= 2 || doubleclick)
+        if (Input.touches.Length >= 2 || doubleclick)
         {
             doubleclick = false;
             Save();
-            SceneManager.LoadScene(PlayerPrefs.GetString("GameMode").ToLower());
+            SceneManager.LoadScene(GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
         }
 
     }
@@ -50,7 +88,7 @@ public class startup : MonoBehaviour
         PlayerPrefs.SetFloat("ballsize", GameObject.Find("ballsize").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("securedistance", GameObject.Find("securedistance").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
-        PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
+        //PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
         PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
         PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
     }
