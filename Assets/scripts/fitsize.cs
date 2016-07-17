@@ -2,8 +2,9 @@
 using System.Collections;
 
 public class fitsize : MonoBehaviour {
-    public bool w;
-    public bool h;
+    public bool sprite=false;
+    public bool colllider=false;
+    public bool mesh=false;
 
     float width ;
     float height;
@@ -14,10 +15,29 @@ public class fitsize : MonoBehaviour {
 
 
     void Start () {
+
         transform.localScale = new Vector3(1, 1, 1);
 
-        width = GetComponent<Collider2D>().bounds.size.x;
-        height = GetComponent<Collider2D>().bounds.size.y;
+        if (sprite)
+        {
+            width = GetComponent<SpriteRenderer>().bounds.size.x;
+            height = GetComponent<SpriteRenderer>().bounds.size.y;
+        }
+
+        if (colllider)
+        {
+            width = GetComponent<Collider2D>().bounds.size.x;
+            height = GetComponent<Collider2D>().bounds.size.y;
+        }
+
+
+        if (mesh)
+        {
+            width = GetComponent<MeshRenderer>().bounds.size.x;
+            height = GetComponent<MeshRenderer>().bounds.size.y;
+        }
+
+
 
         worldScreenHeight = Camera.main.orthographicSize * 2.0f;
         worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
