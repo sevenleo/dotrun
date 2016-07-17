@@ -4,68 +4,68 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class status : MonoBehaviour {
+
+    //OBJ
     public GameObject specialbar;
+
+    //COLORS
+    static public Color playercolor { get; set; }
+    static public Color bgcolor { get; set; }
+
+    //FLOAT
     static public float speciallimit { get; set; }
     static public float ballsize { get; set; }
     static public float special { get; set; }
     static public float securedistance { get; set; }
     static public float maxenemys { get; set; }
     static public float enemyspeed { get; set; }
-    static public int score { get; set; }
-    static public bool wait;
     static public float maxscreenside { get; set; }
     static public float minscreenside { get; set; }
-    static public int z = 10;
     static public float defensevalue = 1f;
+    static public float traillife = 0.2f;
+    static public float playerspeed = 0.5f;
+
+    //INT
+    static public int score { get; set; }
+    static public int z = 10;
+
+    //BOOL
+    static public bool wait { get; set; }
     static public bool gravity;
     static public bool GodMode;
-    static public float traillife=0.2f;
-    static public float playerspeed = 0.5f;
+
+    //STRING
     static public string GameMode;
+
+    //PRIVATES
+    Vector3 screen;
     int x, y;
     int goal;
-    Vector3 screen;
+
 
     void Start()
     {
-        
+        Camera.main.backgroundColor = bgcolor;
+        GameObject.Find("centertxt").GetComponent<Text>().color = playercolor;
+        GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color = playercolor;
+
         screen = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10));
         maxscreenside = (screen.x > screen.y) ? screen.x : screen.y;
         minscreenside = (screen.x < screen.y) ? screen.x : screen.y;
-        /*speciallimit=17f;
-        enemyspeed = 1.5f;
-        maxenemys = 5;
-        securedistance = 2f;
-        wait = false;
-        special = 5;*/
         score = 0;
-        goal = 5;
+        goal = 10;
         Load();
     }
 
 
     void Update()
     {
-        if ( score> PlayerPrefs.GetInt("bestscore") || PlayerPrefs.GetInt("bestscore")==0 )
-            PlayerPrefs.SetInt("bestscore", score);
-
+        GameObject.Find("centertxt").GetComponent<Text>().text = "" + status.score;
+        SetBestScore();
+        SpecialBar();
+        Goal();
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("startup");
-
-        if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
-        else specialbar.transform.localScale = Vector3.zero;
-
-        special += Time.deltaTime;
-        
-        GameObject.Find("centertxt").GetComponent<Text>().text = "" + (int)status.score;
-
-        if (score > goal)
-        {
-            maxenemys = maxenemys * 1.5f;
-            goal = goal * 2;
-            if (special < speciallimit) special *= 1.5f;
-            securedistance *= 0.99f;
-        }
     }
 
 
@@ -83,23 +83,166 @@ public class status : MonoBehaviour {
         defensevalue = PlayerPrefs.GetFloat("defensevalue");
         GameMode = PlayerPrefs.GetString("GameMode");
 
-        if (PlayerPrefs.GetString("GameMode") == "dotrun")
-        {
-            gravity = false;
-        }
-        else if (PlayerPrefs.GetString("GameMode") == "gravity")
-        {
+
+        if (GameMode == "gravity")
             gravity = true;
-        }
-        else if (PlayerPrefs.GetString("GameMode") == "snooker")
-        {
+        else
             gravity = false;
-        }
+
 
         if (PlayerPrefs.GetInt("GodMode") == 1)
             GodMode = true;
         else
             GodMode = false;
 
+    }
+
+
+    void SetBestScore()
+    {
+
+        ///////// DOTRUN  /////////
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+
+            if (score > PlayerPrefs.GetInt("bestscore_dotrun"))
+                PlayerPrefs.SetInt("bestscore_dotrun", score);
+        }
+
+        ///////// TREASURE  /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+
+            if (score > PlayerPrefs.GetInt("bestscore_treasure"))
+                PlayerPrefs.SetInt("bestscore_treasure", score);
+        }
+
+        ///////// GRAVITY /////////
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+
+            if (score > PlayerPrefs.GetInt("bestscore_gravity"))
+                PlayerPrefs.SetInt("bestscore_gravity", score);
+        }
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+            if (score > PlayerPrefs.GetInt("bestscore_snooker"))
+                PlayerPrefs.SetInt("bestscore_snooker", score);
+        }
+
+    }
+
+
+    void Goal() {
+
+        ///////// DOTRUN  /////////
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+            if (score > goal)
+            {
+                maxenemys = maxenemys * 1.1f;
+                goal = goal * 2;
+                if (special < speciallimit) special *= 1.5f;
+                securedistance *= 0.99f;
+            }
+        }
+
+        ///////// TREASURE  /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+            if (score > goal)
+            {
+                maxenemys = maxenemys * 1.1f;
+                goal = goal * 2;
+                if (special < speciallimit) special *= 1.5f;
+                securedistance *= 0.99f;
+            }
+        }
+
+        ///////// GRAVITY /////////
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+            if (score > goal)
+            {
+                maxenemys = maxenemys * 1.1f;
+                goal = goal * 2;
+                if (special < speciallimit) special *= 1.5f;
+                securedistance *= 0.99f;
+            }
+        }
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+        }
+
+    }
+
+
+    void SpecialBar()
+    {
+
+
+
+        ///////// DOTRUN  /////////
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+            if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
+            else specialbar.transform.localScale = Vector3.zero;
+            special += Time.deltaTime;
+        }
+
+        ///////// TREASURE  /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+            if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
+            else specialbar.transform.localScale = Vector3.zero;
+        }
+
+        ///////// GRAVITY /////////
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+            if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
+            else specialbar.transform.localScale = Vector3.zero;
+            special += Time.deltaTime;
+        }
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+        }
+    }
+
+
+    void defaultvalues()
+    {
+        ///////// DOTRUN  /////////
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+        {
+
+        }
+
+        ///////// TREASURE  /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+
+        }
+
+        ///////// GRAVITY /////////
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+
+        }
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+        }
     }
 }

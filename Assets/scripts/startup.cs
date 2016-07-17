@@ -9,8 +9,9 @@ public class startup : MonoBehaviour
     float clicktime;
     float clickrate = 0.18f;
     bool doubleclick = false;
-    Color c,cdefault ;
+    Color playercolor,bgcolor,cdefault ;
     string t;
+    int best;
 
     void Start()
     {
@@ -24,39 +25,50 @@ public class startup : MonoBehaviour
     void Update()
     {
 
-        PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
-
         switch (GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower())
         {
             case "dotrun":
                 t = "DOT RUN";
-                c = cdefault;
-                Camera.main.backgroundColor = new Color(0.0f, 0.0f, 0.1f, 1f);
+                playercolor = cdefault;
+                bgcolor = new Color(0.0f, 0.0f, 0.1f, 1f);
+                best = PlayerPrefs.GetInt("bestscore_dotrun");
+                PlayerPrefs.SetString("GameMode", "dotrun");
                 break;
             case "treasure":
                 t = "* Treasure * ";
+                playercolor = new Color(0.8f, 0.8f, 0.8f, 1f); ;
+                bgcolor = new Color(0.0f, 0.0f, 0.0f, 1f);
+                best = PlayerPrefs.GetInt("bestscore_treasure");
+                PlayerPrefs.SetString("GameMode", "treasure");
                 break;
             case "gravity":
                 t = "Gravity";
-                c = Color.black;
-                Camera.main.backgroundColor = new Color(0.4f, 0.4f, 0.4f, 1f);
+                playercolor = Color.black;
+                best = PlayerPrefs.GetInt("bestscore_gravity");
+                bgcolor = new Color(0.4f, 0.4f, 0.4f, 1f);
+                PlayerPrefs.SetString("GameMode", "gravity");
                 break;
             case "snooker":
-                c = new Color(1f, 1f, 1f, 1f);
+                playercolor = new Color(1f, 1f, 1f, 1f);
                 t = "Sn00ker";
-                Camera.main.backgroundColor = new Color(0f, 0.25f, 0.0f, 1f);
+                best = PlayerPrefs.GetInt("bestscore_snooker");
+                bgcolor = new Color(0f, 0.25f, 0.0f, 1f);
+                PlayerPrefs.SetString("GameMode", "snooker");
                 break;
             default:
                 break;
         }
 
+        Camera.main.backgroundColor = bgcolor;
+        GameObject.Find("bestscore").GetComponent<Text>().text = "Best: "+best;
         GameObject.Find("centertxt").GetComponent<Text>().text = t;
-        GameObject.Find("centertxt").GetComponent<Text>().color = c;
-        GameObject.Find("Text").GetComponent<Text>().color = c;
-        GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color = c;
-
-
-
+        GameObject.Find("centertxt").GetComponent<Text>().color = playercolor;
+        GameObject.Find("Text").GetComponent<Text>().color = playercolor;
+        GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color = playercolor;
+        foreach ( Slider sl in FindObjectsOfType<Slider>())
+        {
+            sl.GetComponent<Slider>().colors = new ColorBlock();
+        }
 
 
         if (Input.GetMouseButtonDown(0))
@@ -79,7 +91,7 @@ public class startup : MonoBehaviour
 
     void Save()
     {
-        
+
         PlayerPrefs.SetFloat("traillife", GameObject.Find("traillife").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("maxenemys", GameObject.Find("maxenemys").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("enemyspeed", GameObject.Find("enemyspeed").GetComponent<Slider>().value);
@@ -91,6 +103,9 @@ public class startup : MonoBehaviour
         //PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
         PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
         PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
+
+        status.bgcolor = bgcolor;
+        status.playercolor = playercolor;
     }
 
 }

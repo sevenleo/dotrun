@@ -8,12 +8,52 @@ public class life : MonoBehaviour {
     {
         transform.localScale = transform.localScale * status.ballsize;
     }
+
+
+
     void OnTriggerEnter2D(Collider2D other)
     {
-        if ( !status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "base" && other.tag != "PlayerSprite")
+
+
+        ///////// DOTRUN  /////////
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
-            //Debug.LogError(other.name + " do tipo " + other.tag + " me matou");
-            SceneManager.LoadScene("startup");
+            if (!status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "PlayerSprite")
+            {
+                SceneManager.LoadScene("startup");
+            }
         }
+
+
+        ///////// TREASURE  /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+            if (!status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "PlayerSprite" && other.tag != "Player")
+            {
+                SceneManager.LoadScene("startup");
+            }
+        }
+
+
+        ///////// GRAVITY /////////
+        else if (PlayerPrefs.GetString("GameMode") == "gravity")
+        {
+            if (!status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "base" && other.tag != "PlayerSprite")
+            {
+                SceneManager.LoadScene("startup");
+            }
+        }
+
+
+
+        ///////// SNOOKER /////////
+        else if (PlayerPrefs.GetString("GameMode") == "snooker")
+        {
+
+
+        }
+
+
+      
     }
 }

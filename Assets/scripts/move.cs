@@ -68,9 +68,19 @@ public class move : MonoBehaviour
 
 
         ///////// TREASURE  /////////
-        if (PlayerPrefs.GetString("GameMode") == "treasure")
+        else if (PlayerPrefs.GetString("GameMode") == "treasure")
         {
+            if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
+            {
+                transform.position = mouseposition;
+            }
 
+            if (Input.GetMouseButton(1))
+            {
+                transform.position = mouseposition;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            }
         }
 
 
@@ -79,7 +89,7 @@ public class move : MonoBehaviour
         {
             if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
             {
-                GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.position, mouseposition, status.playerspeed / 10), ForceMode2D.Force);
+                GetComponent<Rigidbody2D>().AddForce(Vector2.Lerp(transform.position, mouseposition, status.playerspeed / 5), ForceMode2D.Force);
             }
 
             SwipeMouse();
@@ -113,6 +123,7 @@ public class move : MonoBehaviour
     /// <summary>
     // FUNCOES DE SWIPE COM O MOUSE OU COM O TOUCH
     /// </summary>
+    //////////////////////////////////////////////////////////////////////////////////
 
     public void SwipeMouse()
     {
