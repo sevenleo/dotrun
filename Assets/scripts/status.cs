@@ -33,6 +33,7 @@ public class status : MonoBehaviour {
     static public bool wait { get; set; }
     static public bool gravity;
     static public bool GodMode;
+    static public bool debug;
 
     //STRING
     static public string GameMode;
@@ -84,6 +85,7 @@ public class status : MonoBehaviour {
         GameMode = PlayerPrefs.GetString("GameMode");
 
 
+
         if (GameMode == "gravity")
             gravity = true;
         else
@@ -94,6 +96,11 @@ public class status : MonoBehaviour {
             GodMode = true;
         else
             GodMode = false;
+
+        if (PlayerPrefs.GetInt("debug") == 1)
+            debug = true;
+        else
+            debug = false;
 
     }
 

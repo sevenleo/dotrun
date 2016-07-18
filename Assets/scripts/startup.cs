@@ -10,7 +10,7 @@ public class startup : MonoBehaviour
     float clickrate = 0.18f;
     bool doubleclick = false;
     Color playercolor,bgcolor,cdefault ;
-    string t;
+    string title;
     int best;
 
     void Start()
@@ -28,21 +28,21 @@ public class startup : MonoBehaviour
         switch (GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower())
         {
             case "dotrun":
-                t = "DOT RUN";
+                title = "DOT RUN";
                 playercolor = cdefault;
                 bgcolor = new Color(0.0f, 0.0f, 0.1f, 1f);
                 best = PlayerPrefs.GetInt("bestscore_dotrun");
                 PlayerPrefs.SetString("GameMode", "dotrun");
                 break;
             case "treasure":
-                t = "* Treasure * ";
+                title = "* Treasure * ";
                 playercolor = new Color(0.8f, 0.8f, 0.8f, 1f); ;
                 bgcolor = new Color(0.0f, 0.0f, 0.0f, 1f);
                 best = PlayerPrefs.GetInt("bestscore_treasure");
                 PlayerPrefs.SetString("GameMode", "treasure");
                 break;
             case "gravity":
-                t = "Gravity";
+                title = "Gravity";
                 playercolor = Color.black;
                 best = PlayerPrefs.GetInt("bestscore_gravity");
                 bgcolor = new Color(0.4f, 0.4f, 0.4f, 1f);
@@ -50,7 +50,7 @@ public class startup : MonoBehaviour
                 break;
             case "snooker":
                 playercolor = new Color(1f, 1f, 1f, 1f);
-                t = "Sn00ker";
+                title = "Sn00ker";
                 best = PlayerPrefs.GetInt("bestscore_snooker");
                 bgcolor = new Color(0f, 0.25f, 0.0f, 1f);
                 PlayerPrefs.SetString("GameMode", "snooker");
@@ -61,7 +61,7 @@ public class startup : MonoBehaviour
 
         Camera.main.backgroundColor = bgcolor;
         GameObject.Find("bestscore").GetComponent<Text>().text = "Best: "+best;
-        GameObject.Find("centertxt").GetComponent<Text>().text = t;
+        GameObject.Find("centertxt").GetComponent<Text>().text = title;
         GameObject.Find("centertxt").GetComponent<Text>().color = playercolor;
         GameObject.Find("Text").GetComponent<Text>().color = playercolor;
         GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color = playercolor;
@@ -102,6 +102,7 @@ public class startup : MonoBehaviour
         PlayerPrefs.SetFloat("defensevalue", GameObject.Find("defensevalue").GetComponent<Slider>().value);
         //PlayerPrefs.SetInt("gravity", GameObject.Find("gravity").GetComponent<Toggle>().isOn? 1 : 0);
         PlayerPrefs.SetInt("GodMode", GameObject.Find("GodMode").GetComponent<Toggle>().isOn ? 1 : 0);
+        PlayerPrefs.SetInt("debug", GameObject.Find("debug").GetComponent<Toggle>().isOn ? 1 : 0);
         PlayerPrefs.SetString("GameMode", GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower());
 
         status.bgcolor = bgcolor;

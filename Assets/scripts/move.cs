@@ -47,6 +47,7 @@ public class move : MonoBehaviour
             if (Input.GetMouseButton(1))
             {
                 transform.position = mouseposition;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             }
         }
 
