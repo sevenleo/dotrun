@@ -55,7 +55,7 @@ public class attackplayer : MonoBehaviour {
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
-            Destroy(gameObject, 10f);
+            Destroy(gameObject, Random.Range(10,30));
             GetComponent<Rigidbody2D>().gravityScale = 0f;
             if (life <= 0) Destroy(gameObject);
 

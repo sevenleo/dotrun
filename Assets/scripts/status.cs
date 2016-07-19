@@ -7,7 +7,6 @@ public class status : MonoBehaviour {
 
     //OBJ
     public GameObject specialbar;
-    public GameObject treasure;
 
     //COLORS
     static public Color playercolor { get; set; }
@@ -73,6 +72,8 @@ public class status : MonoBehaviour {
     void Update()
     {
         GameObject.Find("centertxt").GetComponent<Text>().text = "" + status.score;
+        if (PlayerPrefs.GetString("GameMode") == "dotrun")
+            status.special += Time.deltaTime;
         SetBestScore();
         //SpecialBar();
         //Goal();
@@ -154,53 +155,6 @@ public class status : MonoBehaviour {
 
     }
 
-    /*
-    void Goal() {
-
-        ///////// DOTRUN  /////////
-        if (PlayerPrefs.GetString("GameMode") == "dotrun")
-        {
-            if (score > goal)
-            {
-                maxenemys = maxenemys * 1.2f;
-                goal = goal * 2;
-                if (special < speciallimit) special *= 1.5f;
-                securedistance *= 0.99f;
-            }
-        }
-
-        ///////// TREASURE  /////////
-        else if (PlayerPrefs.GetString("GameMode") == "treasure")
-        {
-            if (score > goal)
-            {
-                maxenemys = maxenemys * 1.2f;
-                goal = goal * 2;
-                if (special < speciallimit) special *= 1.5f;
-                securedistance *= 0.99f;
-            }
-        }
-
-        ///////// GRAVITY /////////
-        else if (PlayerPrefs.GetString("GameMode") == "gravity")
-        {
-            if (score > goal)
-            {
-                maxenemys = maxenemys * 1.2f;
-                goal = goal * 2;
-                if (special < speciallimit) special *= 1.5f;
-                securedistance *= 0.99f;
-            }
-        }
-
-        ///////// SNOOKER /////////
-        else if (PlayerPrefs.GetString("GameMode") == "snooker")
-        {
-
-        }
-
-    }
-    */
 
 
     void SpecialBar()

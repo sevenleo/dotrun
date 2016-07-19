@@ -46,8 +46,10 @@ public class Display : MonoBehaviour {
                 ;
         }
         else {
-
-            GetComponent<Text>().text = status.GameMode+"\ngoal: "+status.goal+"\nSpecial: "+status.special+ "\nScore: " + status.score;
+            if (PlayerPrefs.GetString("GameMode") == "dotrun")
+                GetComponent<Text>().text = status.GameMode + "\ngoal: " + status.goal + "\nSpecial: " + (int)status.special/status.defensevalue+"\nDefenseValue: "+status.defensevalue;
+            else
+                GetComponent<Text>().text = status.GameMode+"\ngoal: "+status.goal+"\nSpecial: "+(int)status.special;
         }
 
     }

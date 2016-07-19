@@ -5,7 +5,7 @@ public class dotrun : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        status.special = 2;
+        status.special += 30;
 	}
 	
 	// Update is called once per frame
