@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class startup : MonoBehaviour
 {
-
+    public GameObject player;
     float clicktime;
     float clickrate = 0.18f;
     bool doubleclick = false;
@@ -15,7 +15,10 @@ public class startup : MonoBehaviour
 
     void Start()
     {
-        
+        Screen.autorotateToPortrait = true;
+        Screen.autorotateToPortraitUpsideDown = true;
+        Screen.orientation = ScreenOrientation.AutoRotation;
+
         PlayerPrefs.SetString("GameMode", "startup");
         clicktime = Time.time;
         cdefault = GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color;
@@ -24,7 +27,7 @@ public class startup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        player.transform.localScale = new Vector3(GameObject.Find("ballsize").GetComponent<Slider>().value, GameObject.Find("ballsize").GetComponent<Slider>().value, GameObject.Find("ballsize").GetComponent<Slider>().value);
         switch (GameObject.Find("GameMode").GetComponent<Dropdown>().captionText.text.ToLower())
         {
             case "dotrun":
