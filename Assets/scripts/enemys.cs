@@ -46,7 +46,8 @@ public class enemys : MonoBehaviour {
 
                 Vector3 pos = RandomCircle(center, status.maxscreenside * status.securedistance, status.maxscreenside * status.securedistance * 1.5f);
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
-                Instantiate(enemy, pos, Quaternion.identity);
+               Instantiate(enemy, pos, Quaternion.identity);
+               
             }
         }
 
@@ -60,7 +61,9 @@ public class enemys : MonoBehaviour {
                 ControlTime = Time.time + ControlTimeRate;
                 Vector3 center = GameObject.FindGameObjectWithTag("Player").transform.position;
 
-                Vector3 pos = center + new Vector3(Random.Range(-screen.x, screen.x), Random.Range(screen.y, screen.y*2),0);
+                Vector3 pos = RandomCircle(center, status.maxscreenside * status.securedistance, status.maxscreenside * status.securedistance * 1.5f);
+
+                //Vector3 pos = center + new Vector3(Random.Range(-screen.x, screen.x), Random.Range(screen.y, screen.y*2),0);
                 //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
                 Instantiate(enemy, pos, Quaternion.identity);
             }

@@ -6,6 +6,11 @@ public class treasure : MonoBehaviour {
     
     public GameObject treasure0;
 
+    void Start()
+    {
+        status.special = 0;
+    }
+
     void Update () {
 
         if (status.score >= status.goal)

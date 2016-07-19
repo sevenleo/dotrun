@@ -74,7 +74,7 @@ public class status : MonoBehaviour {
     {
         GameObject.Find("centertxt").GetComponent<Text>().text = "" + status.score;
         SetBestScore();
-        SpecialBar();
+        //SpecialBar();
         //Goal();
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("startup");
@@ -228,7 +228,6 @@ public class status : MonoBehaviour {
         {
             if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
             else specialbar.transform.localScale = Vector3.zero;
-            special += Time.deltaTime;
         }
 
         ///////// SNOOKER /////////

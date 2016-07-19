@@ -113,4 +113,8 @@ public class startup : MonoBehaviour
         status.playercolor = playercolor;
     }
 
+    public void Quit()
+    {
+        Application.Quit();
+    }
 }

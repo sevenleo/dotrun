@@ -18,7 +18,7 @@ public class attackplayer : MonoBehaviour {
     void Start() {
         player = GameObject.FindGameObjectWithTag("Player");
         treasure = GameObject.FindGameObjectWithTag("treasure");
-        transform.localScale = transform.localScale * status.ballsize;
+        //transform.localScale = transform.localScale * status.ballsize;
 
     }
 
@@ -56,7 +56,7 @@ public class attackplayer : MonoBehaviour {
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
             Destroy(gameObject, 10f);
-            GetComponent<Rigidbody2D>().gravityScale = 1;
+            GetComponent<Rigidbody2D>().gravityScale = 0f;
             if (life <= 0) Destroy(gameObject);
 
             moveTo = player.transform.position - transform.position;

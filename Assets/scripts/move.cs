@@ -9,6 +9,7 @@ public class move : MonoBehaviour
     Vector3 screen;
     Vector3 mouseposition;
 
+    LineRenderer aim;
 
     Vector2 firstPressPos;
     Vector2 secondPressPos;
@@ -19,10 +20,15 @@ public class move : MonoBehaviour
     float z;
 
 
+
     void Start()
     {   
         screen = new Vector3(Screen.width, Screen.height, status.z);
         screen = Camera.main.ScreenToWorldPoint(screen);
+
+
+        if (PlayerPrefs.GetString("GameMode") == "gravity"  || PlayerPrefs.GetString("GameMode") == "snooker")
+            aim = GetComponent<LineRenderer>();
     }
 
 
@@ -107,7 +113,14 @@ public class move : MonoBehaviour
             {
                 SwipeMouse();
                 //Swipe();
+
             }
+            Debug.Log(firstPressPos);
+            Debug.Log(secondPressPos);
+            Debug.Log(Input.mousePosition);
+
+            aim.SetPosition(0, firstPressPos);
+            aim.SetPosition(1, Input.mousePosition);
 
             if (Input.GetMouseButton(1) && status.score==0)
             {
@@ -127,11 +140,15 @@ public class move : MonoBehaviour
 
     public void SwipeMouse()
     {
+
         if (Input.GetMouseButtonDown(0))
         {
             //save began touch 2d point
             firstPressPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+
         }
+
+
         if (Input.GetMouseButtonUp(0))
         {
             //save ended touch 2d point

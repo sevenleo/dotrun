@@ -32,6 +32,7 @@ public class Display : MonoBehaviour {
                 "\nMax n Min Screensize  " + status.minscreenside + " ~ " + status.maxscreenside +
                 "\nMouse = " + mouseposition +
                 "\nDistance mouse2player= " + Vector2.Distance(mouseposition, player.transform.position) +
+                "\nDistance playerTo000 = "+Vector3.Distance(player.transform.position, Vector3.zero)+
                 "\nSpecial = " + specialnormalized +
                 "\nSpecialimit = " + status.speciallimit +
                 "\nMaxEnemys = " + status.maxenemys +
@@ -46,7 +47,7 @@ public class Display : MonoBehaviour {
         }
         else {
 
-            GetComponent<Text>().text = status.GameMode+"\ngoal > "+status.goal;
+            GetComponent<Text>().text = status.GameMode+"\ngoal: "+status.goal+"\nSpecial: "+status.special+ "\nScore: " + status.score;
         }
 
     }
