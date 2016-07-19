@@ -31,5 +31,6 @@ public class randomposition : MonoBehaviour {
         go.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
         go.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
         go.transform.localScale = Vector3.one;
+        go.GetComponent<AudioSource>().Play();
     }
 }

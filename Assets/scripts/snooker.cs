@@ -21,11 +21,14 @@ public class snooker : MonoBehaviour {
         {
             if (gameObject.name == "Player") {
                 status.score = 0;
+                gameObject.transform.position = Vector3.zero;
+                gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             } 
 
 
             else if (gameObject.name == "Player2")
             {
+                collisionInfo.gameObject.GetComponent<AudioSource>().Play();
                 status.score += 1;
                 randomposition.RandomColorAndposition(gameObject);
             }

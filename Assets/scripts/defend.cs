@@ -169,7 +169,7 @@ public class defend : MonoBehaviour
         if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
             doubleclick = false;
-            GetComponent<AudioSource>().Play();
+            GetComponents<AudioSource>()[0].Play();
             nextfire = Time.time + firerate;
             sphere = Instantiate<GameObject>(sphere_prefab);
             sphere.transform.position = transform.position;
@@ -185,7 +185,7 @@ public class defend : MonoBehaviour
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
         {
             doubleclick = false;
-            GetComponent<AudioSource>().Play();
+            GetComponents<AudioSource>()[0].Play();
             nextfire = Time.time + firerate;
             sphere = Instantiate<GameObject>(sphere_prefab);
             sphere.transform.position = transform.position;
@@ -201,7 +201,7 @@ public class defend : MonoBehaviour
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
             doubleclick = false;
-            GetComponent<AudioSource>().Play();
+            GetComponents<AudioSource>()[0].Play();
             nextfire = Time.time + firerate;
             sphere = Instantiate<GameObject>(sphere_prefab);
             sphere.transform.position = transform.position;
@@ -217,7 +217,7 @@ public class defend : MonoBehaviour
         else if (PlayerPrefs.GetString("GameMode") == "snooker")
         {
             doubleclick = false;
-            GetComponent<AudioSource>().Play();
+            GetComponents<AudioSource>()[0].Play();
             nextfire = Time.time + firerate;
             sphere = Instantiate<GameObject>(sphere_prefab);
             sphere.transform.position = transform.position;

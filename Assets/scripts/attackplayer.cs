@@ -123,6 +123,7 @@ public class attackplayer : MonoBehaviour {
                     life--;
                     status.score += value;
                     status.special += 0.05f;
+                    GetComponent<AudioSource>().Play();
                     Destroy(gameObject);
                     break;
                 case "defense":

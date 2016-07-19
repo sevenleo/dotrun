@@ -19,6 +19,7 @@ public class move : MonoBehaviour
 
     float z;
 
+    int scorelocal;
 
 
     void Start()
@@ -108,19 +109,20 @@ public class move : MonoBehaviour
         else if (PlayerPrefs.GetString("GameMode") == "snooker")
         {
 
-
+            
             if (GetComponent<Rigidbody2D>().velocity == Vector2.zero)
             {
                 SwipeMouse();
                 //Swipe();
+                //if (status.score <= scorelocal && status.score>0) status.score--;//perder pontos ao errar
 
             }
-            Debug.Log(firstPressPos);
-            Debug.Log(secondPressPos);
-            Debug.Log(Input.mousePosition);
+            //Debug.Log(firstPressPos);
+            //Debug.Log(secondPressPos);
+            //Debug.Log(Input.mousePosition);
 
-            aim.SetPosition(0, firstPressPos);
-            aim.SetPosition(1, Input.mousePosition);
+            //aim.SetPosition(0, firstPressPos);
+            //aim.SetPosition(1, Input.mousePosition);
 
             if (Input.GetMouseButton(1) && status.score==0)
             {
