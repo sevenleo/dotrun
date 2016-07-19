@@ -119,7 +119,13 @@ public class attackplayer : MonoBehaviour {
             {
                 switch (other.tag)
                 {
-                    case "defense":
+                case "Player":
+                    life--;
+                    status.score += value;
+                    status.special += 0.05f;
+                    Destroy(gameObject);
+                    break;
+                case "defense":
                         life--;
                         status.score += value;
                         status.special += 0.05f;

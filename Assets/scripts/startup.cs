@@ -15,7 +15,7 @@ public class startup : MonoBehaviour
 
     void Start()
     {
-        //GameObject.Find("bestscore").GetComponent<Text>().text = GameObject.Find("bestscore").GetComponent<Text>().text + PlayerPrefs.GetInt("bestscore");
+        
         PlayerPrefs.SetString("GameMode", "startup");
         clicktime = Time.time;
         cdefault = GameObject.Find("CirclePlayer").GetComponent<SpriteRenderer>().color;
@@ -96,6 +96,7 @@ public class startup : MonoBehaviour
         PlayerPrefs.SetFloat("maxenemys", GameObject.Find("maxenemys").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("enemyspeed", GameObject.Find("enemyspeed").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("special", GameObject.Find("special").GetComponent<Slider>().value);
+        PlayerPrefs.SetInt("goal", (int)GameObject.Find("goal").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("speciallimit", GameObject.Find("speciallimit").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("ballsize", GameObject.Find("ballsize").GetComponent<Slider>().value);
         PlayerPrefs.SetFloat("securedistance", GameObject.Find("securedistance").GetComponent<Slider>().value);

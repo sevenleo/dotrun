@@ -12,9 +12,13 @@ public class fitsize : MonoBehaviour {
     float worldScreenHeight;
     float worldScreenWidth;
 
+    void Start()
+    {
 
+    }
 
-    void Start () {
+    /*
+    void Update () {
 
         transform.localScale = new Vector3(1, 1, 1);
 
@@ -59,5 +63,5 @@ public class fitsize : MonoBehaviour {
         worldScreenWidth = worldScreenHeight / Screen.height * Screen.width;
 
         transform.localScale = new Vector3(worldScreenWidth / width, worldScreenHeight / height);
-    }
+    }*/
 }

@@ -16,14 +16,13 @@ public class move : MonoBehaviour
     Vector2 direction;
     Vector2 scale;
 
+    float z;
 
 
     void Start()
-    {
-        
+    {   
         screen = new Vector3(Screen.width, Screen.height, status.z);
         screen = Camera.main.ScreenToWorldPoint(screen);
-
     }
 
 
@@ -32,7 +31,7 @@ public class move : MonoBehaviour
     {
 
 
-
+        
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, status.z);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
 

@@ -29,6 +29,7 @@ public class Display : MonoBehaviour {
             GetComponent<Text>().text =
                 "\nTela = " + screen +
                  "\nWorld = " + Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, 10)) +
+                "\nMax n Min Screensize  " + status.minscreenside + " ~ " + status.maxscreenside +
                 "\nMouse = " + mouseposition +
                 "\nDistance mouse2player= " + Vector2.Distance(mouseposition, player.transform.position) +
                 "\nSpecial = " + specialnormalized +
@@ -36,14 +37,17 @@ public class Display : MonoBehaviour {
                 "\nMaxEnemys = " + status.maxenemys +
                 "\nEnemysSpeed = " + status.enemyspeed +
                 "\nsecuredistance = " + status.securedistance +
+                "\nballsize = " + status.ballsize+
                 "\nscore = " + status.score +
                 "\nGameMode = " + status.GameMode +
                 "\ngravity = " + status.gravity +
                 "\nGodMode = " + status.GodMode
                 ;
         }
-        else
-            GetComponent<Text>().text = status.GameMode;
+        else {
+
+            GetComponent<Text>().text = status.GameMode+"\ngoal > "+status.goal;
+        }
 
     }
 }

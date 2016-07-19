@@ -8,7 +8,6 @@ public class randomposition : MonoBehaviour {
     public void Start () {
 
         RandomColorAndposition(gameObject);
-
     }
 	
 	void Update () {
@@ -31,5 +30,6 @@ public class randomposition : MonoBehaviour {
         go.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
         go.GetComponent<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
         go.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+        go.transform.localScale = Vector3.one;
     }
 }

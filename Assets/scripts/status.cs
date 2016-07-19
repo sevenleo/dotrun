@@ -7,6 +7,7 @@ public class status : MonoBehaviour {
 
     //OBJ
     public GameObject specialbar;
+    public GameObject treasure;
 
     //COLORS
     static public Color playercolor { get; set; }
@@ -19,15 +20,25 @@ public class status : MonoBehaviour {
     static public float securedistance { get; set; }
     static public float maxenemys { get; set; }
     static public float enemyspeed { get; set; }
-    static public float maxscreenside { get; set; }
-    static public float minscreenside { get; set; }
     static public float defensevalue = 1f;
     static public float traillife = 0.2f;
     static public float playerspeed = 0.5f;
+    static public float z = 10;
+
+    //screen
+    static public float maxscreenside { get; set; }
+    static public float minscreenside { get; set; }
+    //static public float screenx = 9.2f;
+    //static public float screen_x = -9.2f;
+    //static public float screeny = 6.8f;
+    //static public float screen_y = -4.8f;
+    //static public float maxscreenside = 9.2f;
+    //static public float minscreenside = 4.8f;
 
     //INT
     static public int score { get; set; }
-    static public int z = 10;
+    static public int goal;
+
 
     //BOOL
     static public bool wait { get; set; }
@@ -41,7 +52,7 @@ public class status : MonoBehaviour {
     //PRIVATES
     Vector3 screen;
     int x, y;
-    int goal;
+
 
 
     void Start()
@@ -54,7 +65,7 @@ public class status : MonoBehaviour {
         maxscreenside = (screen.x > screen.y) ? screen.x : screen.y;
         minscreenside = (screen.x < screen.y) ? screen.x : screen.y;
         score = 0;
-        goal = 10;
+        //goal = 10;
         Load();
     }
 
@@ -64,7 +75,7 @@ public class status : MonoBehaviour {
         GameObject.Find("centertxt").GetComponent<Text>().text = "" + status.score;
         SetBestScore();
         SpecialBar();
-        Goal();
+        //Goal();
         if (Input.GetKeyDown(KeyCode.Escape))
             SceneManager.LoadScene("startup");
     }
@@ -79,6 +90,7 @@ public class status : MonoBehaviour {
         enemyspeed = PlayerPrefs.GetFloat("enemyspeed");
         special = PlayerPrefs.GetFloat("special");
         speciallimit = PlayerPrefs.GetFloat("speciallimit");
+        goal = PlayerPrefs.GetInt("goal");
         ballsize = PlayerPrefs.GetFloat("ballsize");
         securedistance = PlayerPrefs.GetFloat("securedistance");
         defensevalue = PlayerPrefs.GetFloat("defensevalue");
@@ -142,7 +154,7 @@ public class status : MonoBehaviour {
 
     }
 
-
+    /*
     void Goal() {
 
         ///////// DOTRUN  /////////
@@ -150,7 +162,7 @@ public class status : MonoBehaviour {
         {
             if (score > goal)
             {
-                maxenemys = maxenemys * 1.1f;
+                maxenemys = maxenemys * 1.2f;
                 goal = goal * 2;
                 if (special < speciallimit) special *= 1.5f;
                 securedistance *= 0.99f;
@@ -162,7 +174,7 @@ public class status : MonoBehaviour {
         {
             if (score > goal)
             {
-                maxenemys = maxenemys * 1.1f;
+                maxenemys = maxenemys * 1.2f;
                 goal = goal * 2;
                 if (special < speciallimit) special *= 1.5f;
                 securedistance *= 0.99f;
@@ -174,7 +186,7 @@ public class status : MonoBehaviour {
         {
             if (score > goal)
             {
-                maxenemys = maxenemys * 1.1f;
+                maxenemys = maxenemys * 1.2f;
                 goal = goal * 2;
                 if (special < speciallimit) special *= 1.5f;
                 securedistance *= 0.99f;
@@ -188,6 +200,7 @@ public class status : MonoBehaviour {
         }
 
     }
+    */
 
 
     void SpecialBar()
