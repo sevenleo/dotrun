@@ -38,11 +38,18 @@ public class startup : MonoBehaviour
                 PlayerPrefs.SetString("GameMode", "dotrun");
                 break;
             case "treasure":
-                title = "* Treasure * ";
+                title = "Trea$ure";
                 playercolor = new Color(0.8f, 0.8f, 0.8f, 1f); ;
                 bgcolor = new Color(0.0f, 0.0f, 0.0f, 1f);
                 best = PlayerPrefs.GetInt("bestscore_treasure");
                 PlayerPrefs.SetString("GameMode", "treasure");
+                break;
+            case "treasurelight":
+                title = "Treasure: *Light*";
+                playercolor = new Color(0.0f, 0.0f, 0.0f, 1f); ;
+                bgcolor = new Color(1.0f, 1.0f, 1.0f, 1f);
+                best = PlayerPrefs.GetInt("bestscore_treasurelight");
+                PlayerPrefs.SetString("GameMode", "treasurelight");
                 break;
             case "gravity":
                 title = "Gravity";

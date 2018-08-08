@@ -10,8 +10,11 @@ public class attackplayer : MonoBehaviour {
     Vector3 direction;
     Vector3 moveTo;
     float distance;
+    float impact = 20.0f;
+    bool collided = false;
     int life = 1;
     int value = 1;
+    float delay = 0.2f;
 
 
     // Use this for initialization
@@ -51,6 +54,38 @@ public class attackplayer : MonoBehaviour {
             transform.position += Time.deltaTime * status.enemyspeed * direction;
         }
 
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            if (life <= 0) Destroy(gameObject,delay);
+
+            GameObject target = treasure;
+
+            GameObject[] treasures = GameObject.FindGameObjectsWithTag("treasure");
+            float distance = 1000f;
+
+            foreach (GameObject treasure in treasures)
+            {
+                float d = Vector3.Distance(this.transform.position, treasure.transform.position);
+                if ( d < distance) {
+                    distance=d;
+                    target = treasure;
+                }
+
+            }
+    
+            if (collided){
+
+            }
+            else {
+                moveTo = target.transform.position - transform.position;
+
+                distance = moveTo.magnitude;
+                direction = moveTo / distance;
+                transform.position += Time.deltaTime * status.enemyspeed * direction;
+            }
+        }
+
 
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
@@ -75,10 +110,6 @@ public class attackplayer : MonoBehaviour {
 
         }
     }
-
-
-
-
 
 
     void OnTriggerEnter2D(Collider2D other)
@@ -124,7 +155,7 @@ public class attackplayer : MonoBehaviour {
                     status.score += value;
                     status.special += 0.05f;
                     GetComponent<AudioSource>().Play();
-                    Destroy(gameObject);
+                    //Destroy(gameObject);
                     break;
                 case "defense":
                         life--;
@@ -149,6 +180,42 @@ public class attackplayer : MonoBehaviour {
                         //gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().color = new Color(GetComponent<SpriteRenderer>().color.r * Random.Range(0, 1), GetComponent<SpriteRenderer>().color.g*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.b*Random.Range(0, 1), GetComponent<SpriteRenderer>().color.a*Random.Range(0.5f, 1));
                     }
                     break;*/
+                    case "treasure":
+                        status.score = 0;
+                        SceneManager.LoadScene("startup");
+                        break;
+                    default:
+                        break;
+                }
+             }
+
+            ///////// TREASURE LIGHT /////////
+            else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+            {
+                switch (other.tag)
+                {
+                case "Player":
+                    collided = true;
+                    life--;
+                    status.score += value;
+                    status.special += 0.05f;
+                    GetComponent<AudioSource>().Play();
+                    Vector3 dir = other.transform.position - transform.position;
+                    dir = -dir.normalized;
+                    GetComponent<Rigidbody2D>().AddForce(dir * impact, ForceMode2D.Impulse);
+                    other.GetComponent<Rigidbody2D>().AddForce(Vector2.zero, ForceMode2D.Impulse);
+                    //Destroy(gameObject);
+                    break;
+                case "defense":
+                        life--;
+                        status.score += value;
+                        status.special += 0.05f;
+                        break;
+                    case "trail":
+                        life--;
+                        status.score += value;
+                        status.special += 0.05f;
+                    break;
                     case "treasure":
                         status.score = 0;
                         SceneManager.LoadScene("startup");

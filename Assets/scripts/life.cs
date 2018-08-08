@@ -35,6 +35,16 @@ public class life : MonoBehaviour {
         }
 
 
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            if (!status.GodMode && other.tag != "trail" && other.tag != "defense" && other.tag != "PlayerSprite" && other.tag != "Player")
+            {
+                SceneManager.LoadScene("startup");
+            }
+        }
+
+
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {

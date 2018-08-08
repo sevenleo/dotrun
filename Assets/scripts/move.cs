@@ -8,6 +8,8 @@ public class move : MonoBehaviour
 {
     Vector3 screen;
     Vector3 mouseposition;
+    Vector3 stepx;
+    Vector3 stepy;
 
     LineRenderer aim;
 
@@ -26,7 +28,9 @@ public class move : MonoBehaviour
     {   
         screen = new Vector3(Screen.width, Screen.height, status.z);
         screen = Camera.main.ScreenToWorldPoint(screen);
-
+        float step = ((Screen.width+Screen.height)/2.0f)*0.0001f;
+        stepx = new Vector3(step, 0.0f, 0.0f);
+        stepy = new Vector3(0.0f, step, 0.0f);
 
         if (PlayerPrefs.GetString("GameMode") == "gravity"  || PlayerPrefs.GetString("GameMode") == "snooker")
             aim = GetComponent<LineRenderer>();
@@ -41,6 +45,8 @@ public class move : MonoBehaviour
         
         mouseposition = new Vector3(Input.mousePosition.x, Input.mousePosition.y, status.z);
         mouseposition = Camera.main.ScreenToWorldPoint(mouseposition);
+
+
 
         ///////// STARTUP  /////////
         if (PlayerPrefs.GetString("GameMode") == "startup")
@@ -77,6 +83,39 @@ public class move : MonoBehaviour
         ///////// TREASURE  /////////
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
         {
+            if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
+            {
+                transform.position = mouseposition;
+            }
+
+            if (Input.GetMouseButton(1))
+            {
+                transform.position = mouseposition;
+                GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+
+            }
+        }
+
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
+            {
+                transform.position += stepy; 
+            }
+            if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
+            {
+                transform.position -= stepy; 
+            }
+            if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
+            {
+                transform.position -= stepx; 
+            }
+            if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
+            {
+                transform.position += stepx; 
+            }
+
             if (Input.GetMouseButton(0) && Vector2.Distance(mouseposition, transform.position) > 0)
             {
                 transform.position = mouseposition;

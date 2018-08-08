@@ -52,6 +52,23 @@ public class enemys : MonoBehaviour {
         }
 
 
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            HowMany = GameObject.FindGameObjectsWithTag("enemy").Length;
+            if (Time.time > ControlTime && HowMany < status.maxenemys && !status.wait )
+            {
+                ControlTime = Time.time + ControlTimeRate;
+                Vector3 center = GameObject.FindGameObjectWithTag("Player").transform.position;
+
+                Vector3 pos = RandomCircle(center, status.maxscreenside * status.securedistance, status.maxscreenside * status.securedistance * 1.5f);
+                //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
+                Instantiate(enemy, pos, Quaternion.identity);
+               
+            }
+        }
+
+
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {

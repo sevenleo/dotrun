@@ -85,6 +85,36 @@ public class defend : MonoBehaviour
             }
         }
 
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (Time.time < clicktime + clickrate && status.special > 0) doubleclick = true;
+                clicktime = Time.time;
+            }
+
+
+            if ((Input.GetMouseButton(1) || Input.touches.Length >= 2 || doubleclick) && Time.time > nextfire && (int)status.special > 0)
+            {
+                defense();
+            }
+
+            if (sphere == null)
+            {
+                launched = false;
+                status.wait = false;
+            }
+            else if (launched)
+            {
+                float a = sphere.GetComponent<SpriteRenderer>().material.color.a;
+                animatespeed = 0.95f;
+                if (sphere.transform.localScale.x < range) sphere.transform.localScale = Vector3.Scale(sphere.transform.localScale, new Vector3(1.1f, 1.1f, 0));
+                sphere.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f, animatespeed * a);
+                Destroy(sphere, 1);
+            }
+        }
+
 
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
@@ -162,9 +192,6 @@ public class defend : MonoBehaviour
     void defense()
     {
 
-
-
-
         ///////// DOTRUN  /////////
         if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
@@ -183,6 +210,22 @@ public class defend : MonoBehaviour
 
         ///////// TREASURE  /////////
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+            doubleclick = false;
+            GetComponents<AudioSource>()[0].Play();
+            nextfire = Time.time + firerate;
+            sphere = Instantiate<GameObject>(sphere_prefab);
+            sphere.transform.position = transform.position;
+            sphere.GetComponent<Renderer>().material = gameObject.GetComponent<Renderer>().material;
+            sphere.GetComponent<SpriteRenderer>().color = gameObject.GetComponent<SpriteRenderer>().color;
+            launched = true;
+            status.wait = true;
+            status.special -= 1;
+            range = status.maxscreenside;
+        }
+
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
         {
             doubleclick = false;
             GetComponents<AudioSource>()[0].Play();

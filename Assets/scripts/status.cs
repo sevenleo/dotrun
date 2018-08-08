@@ -124,7 +124,6 @@ public class status : MonoBehaviour {
         ///////// DOTRUN  /////////
         if (PlayerPrefs.GetString("GameMode") == "dotrun")
         {
-
             if (score > PlayerPrefs.GetInt("bestscore_dotrun"))
                 PlayerPrefs.SetInt("bestscore_dotrun", score);
         }
@@ -132,15 +131,20 @@ public class status : MonoBehaviour {
         ///////// TREASURE  /////////
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
         {
-
             if (score > PlayerPrefs.GetInt("bestscore_treasure"))
                 PlayerPrefs.SetInt("bestscore_treasure", score);
+        }
+
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
+        {
+            if (score > PlayerPrefs.GetInt("bestscore_treasurelight"))
+                PlayerPrefs.SetInt("bestscore_treasurelight", score);
         }
 
         ///////// GRAVITY /////////
         else if (PlayerPrefs.GetString("GameMode") == "gravity")
         {
-
             if (score > PlayerPrefs.GetInt("bestscore_gravity"))
                 PlayerPrefs.SetInt("bestscore_gravity", score);
         }
@@ -148,7 +152,6 @@ public class status : MonoBehaviour {
         ///////// SNOOKER /////////
         else if (PlayerPrefs.GetString("GameMode") == "snooker")
         {
-
             if (score > PlayerPrefs.GetInt("bestscore_snooker"))
                 PlayerPrefs.SetInt("bestscore_snooker", score);
         }
@@ -172,6 +175,13 @@ public class status : MonoBehaviour {
 
         ///////// TREASURE  /////////
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+            if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
+            else specialbar.transform.localScale = Vector3.zero;
+        }
+
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
         {
             if (special > 0) specialbar.transform.localScale = new Vector3(special / 17f, 1f, 1f);
             else specialbar.transform.localScale = Vector3.zero;
@@ -202,6 +212,12 @@ public class status : MonoBehaviour {
 
         ///////// TREASURE  /////////
         else if (PlayerPrefs.GetString("GameMode") == "treasure")
+        {
+
+        }
+        
+        ///////// TREASURE LIGHT /////////
+        else if (PlayerPrefs.GetString("GameMode") == "treasurelight")
         {
 
         }
